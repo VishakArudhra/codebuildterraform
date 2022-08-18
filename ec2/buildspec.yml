@@ -1,0 +1,20 @@
+version: 0.2
+env:
+  variables:
+    AWS_DEFAULT_REGION: "us-east-1"
+phases:
+  build:
+    commands:
+        - cd ec2
+        - terraform init 
+        - |
+          if [ "$uma_trial_run" = "plan" ]; 
+          then 
+             $(echo terraform plan)
+          elif [ "$uma_trial_run" = "apply" ]; 
+          then 
+             $(echo terraform apply --auto-approve)
+          elif [ "$uma_trial_run" = "destroy" ];
+          then
+             $(echo terraform destroy --auto-approve)
+          fi 

@@ -1,0 +1,25 @@
+version: 0.2
+phases:
+  pre_build:
+    commands:
+      - export UMA_PACKAGE_SUFFIX=$(echo $UMA_PACKAGE_SUFFIX)
+      - |
+        if [ "$UMA_PACKAGE_SUFFIX" = "" ]; then
+          export UMA_PACKAGE_SUFFIX=$(echo alpha-$CODEBUILD_BUILD_NUMBER)
+        fi
+      - export UMA_FULL_PACKAGE_VERSION=$(echo $UMA_PACKAGE_VERSION-$UMA_PACKAGE_SUFFIX)
+      - export IMAGE_TAG=$(echo $UMA_FULL_PACKAGE_VERSION)
+      - echo Entered the pre_build phase...
+      - aws ecr describe-repositories --repository-names $IMAGE_REPO_NAME || aws ecr create-repository --repository-name $IMAGE_REPO_NAME  --image-tag-mutability IMMUTABLE
+      - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com
+  build:
+    commands:
+      - echo Entered the build phase...
+      - echo Build started on `date`
+      - docker build -t $IMAGE_REPO_NAME:$IMAGE_TAG -f build_docker_images/Dockerfile .
+      - docker tag $IMAGE_REPO_NAME:$IMAGE_TAG $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG
+  post_build:
+    commands:
+      - echo Entered the post_build phase...
+      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG
+      - echo docker image $IMAGE_REPO_NAME:$IMAGE_TAG pushed to ECR
