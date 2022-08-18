@@ -1,12 +1,19 @@
 provider "aws" {
-  access_key = "AKIA5XXOK3RRN42FDEPY"
-  secret_key = "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"
-  region     = "us-east-1"
+  access_key = "AKIAYQTPUXJFTF4PGMPP"
+  secret_key = "4L97+PmoL7QaLcjs5XpZUL2HLbnp7GBT8tO9XZRq"
+  region     = "ap-south-1"
 }
 
-resource "aws_instance" "example" {
-  ami           = "ami-2757f631"
-  instance_type = "t2.micro"
- 
+resource "aws_s3_bucket" "bucket" {
+  bucket = "terraform.tf-bucket2"
+
+  tags = {
+    Name        = "My bucket"
+    Environment = "Dev"
+  }
 }
 
+resource "aws_s3_bucket_acl" "bucket" {
+  bucket = aws_s3_bucket.bucket.id
+  acl    = "private"
+}
