@@ -1,12 +1,13 @@
 version: 0.2
 env:
   variables:
-    AWS_DEFAULT_REGION: "us-east-1"
+    AWS_DEFAULT_REGION: "ap-south-1"
 phases:
   build:
     commands:
         - cd ec2
         - terraform init
+        - terraform apply --auto-approve
         - |
           if [ "$uma_trial_run" = "plan" ]; 
           then 
