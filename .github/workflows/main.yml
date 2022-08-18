@@ -13,13 +13,24 @@ jobs:
 
     steps:
   
-     - name: Configure AWS Credentials
-       uses: aws-actions/configure-aws-credentials@v1
-       with:
-         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-         aws-region: ap-south-1
-     - name: Run CodeBuild
-       uses: aws-actions/aws-codebuild-run-build@v1
-       with:
+    - name: Configure AWS Credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: ap-south-1
+    - name: Run CodeBuild
+      uses: aws-actions/aws-codebuild-run-build@v1
+      with:
         project-name: terraform-build
+        buildspec-override: ./ec2/buildspec.yml
+        compute-type-override: compute-type
+        environment-type-override: plaintext
+        image-override: 585423436363.dkr.ecr.ap-south-1.amazonaws.com/codebuild-terraform:1.0-alpha-2
+        env-vars-for-codebuild: |
+          uma_trial_run
+          
+      env:
+        
+        uma_trial_run: ${{ github.apply }}
+        
