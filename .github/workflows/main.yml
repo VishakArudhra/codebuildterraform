@@ -30,6 +30,6 @@ jobs:
         env-vars-for-codebuild: |
           uma_trial_run
       env:
-        uma_trial_run: apply
+        uma_trial_run: destroy
         
     
