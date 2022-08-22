@@ -7,6 +7,7 @@ phases:
     commands:
         - cd ec2
         - terraform init
+        
         - |
           if [ "$uma_trial_run" = "plan" ]; 
           then 
