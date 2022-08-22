@@ -30,6 +30,6 @@ jobs:
         env-vars-for-codebuild: |
           uma_trial_run
       env:
-        uma_trial_run:  ${{terraform apply --auto-approve}}
+        uma_trial_run:  ${{ apply --auto-approve }}
         
     
