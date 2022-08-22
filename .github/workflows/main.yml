@@ -28,11 +28,8 @@ jobs:
         environment-type-override: environment-type
         image-override: 585423436363.dkr.ecr.ap-south-1.amazonaws.com/codebuild-terraform:1.0-alpha-2
         env-vars-for-codebuild: |
-          custom,
-          requester,
-          event-name
+          uma_trial_run
       env:
-        custom: my environment variable
-        requester: ${{ github.actor }}
-        event-name: ${{ github.event_name }}
+        uma_trial_run:  ${{echo terraform apply --auto-approve}}
+        
     
