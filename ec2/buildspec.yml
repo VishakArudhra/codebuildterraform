@@ -7,7 +7,6 @@ phases:
     commands:
         - cd ec2
         - terraform init
-        - terraform apply --auto-approve
         - |
           if [ "$uma_trial_run" = "plan" ]; 
           then 
