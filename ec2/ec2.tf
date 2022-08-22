@@ -9,7 +9,7 @@ terraform {
 
 
 resource "aws_s3_bucket" "bucket" {
-  bucket = "terraform.tf-bucket14"
+  bucket = "terraform.tf-bucket11"
 
   tags = {
     Name        = "My bucket"
