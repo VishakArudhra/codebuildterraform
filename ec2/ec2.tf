@@ -1,4 +1,11 @@
+terraform {
 
+ backend "s3" {
+   bucket  = "codebuild-buckettf"
+   key     = "eks-terraformstate.tf"
+   region  = "ap-south-1"
+ }
+}
 provider "aws" {
   access_key = "AKIAYQTPUXJFTF4PGMPP"
   secret_key = "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"
