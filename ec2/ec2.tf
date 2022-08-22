@@ -4,8 +4,17 @@ provider "aws" {
   region     = "ap-south-1"
 }
 
+terraform {
+
+ backend "s3" {
+   bucket  = "terraform.tf-bucket"
+   key     = "eks-terraformstate.tf"
+   region  = "ap-south-1"
+ }
+}
+
 resource "aws_s3_bucket" "bucket" {
-  bucket = "terraform.tf-bucket4"
+  bucket = "terraform.tf-bucket14"
 
   tags = {
     Name        = "My bucket"
