@@ -24,12 +24,10 @@ jobs:
       with:
         project-name: terraform-build
         buildspec-override: ./ec2/buildspec.yml
-        compute-type-override: compute-type
-        environment-type-override: environment-type
         image-override: 585423436363.dkr.ecr.ap-south-1.amazonaws.com/codebuild-terraform:1.0-alpha-2
         env-vars-for-codebuild: |
           uma_trial_run
       env:
-        uma_trial_run: destroy
+        uma_trial_run: apply
         
     
