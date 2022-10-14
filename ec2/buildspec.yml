@@ -1,7 +1,4 @@
 version: 0.2
-env:
-  variables:
-    AWS_DEFAULT_REGION: "ap-south-1"
 phases:
   build:
     commands:
