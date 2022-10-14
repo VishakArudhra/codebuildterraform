@@ -1,12 +1,13 @@
+
+
 terraform {
-
- backend "s3" {
-   bucket  = "codebuild-buckettf"
-   key     = "eks-terraformstate.tf"
-   region  = "ap-south-1"
- }
+  required_providers {
+    aws = {
+      source = "hashicorp/aws"
+      version = "4.34.0"
+    }
+  }
 }
-
 
 resource "aws_s3_bucket" "bucket" {
   bucket = "terraform.tf-bucket11"
