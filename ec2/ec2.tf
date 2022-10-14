@@ -10,7 +10,7 @@ terraform {
 }
 
 resource "aws_s3_bucket" "bucket" {
-  bucket = "terraform.tf-codebuild-demo-bucket-"
+  bucket = "terraform.tf-codebuild-demo-bucket"
 
   tags = {
     Name        = "My bucket"
