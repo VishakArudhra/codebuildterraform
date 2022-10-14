@@ -1,6 +1,6 @@
 terraform {
  backend "s3" {
-   bucket  = "codebuild-buckettf"
+   bucket  = "codebuild-demo-buck"
    key     = "eks-terraformstate.tf"
    region  = "us-east-2"
  }
