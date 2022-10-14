@@ -1,12 +1,9 @@
-
-
 terraform {
-  required_providers {
-    aws = {
-      source = "hashicorp/aws"
-      version = "4.34.0"
-    }
-  }
+ backend "s3" {
+   bucket  = "codebuild-buckettf"
+   key     = "eks-terraformstate.tf"
+   region  = "us-east-2"
+ }
 }
 
 resource "aws_s3_bucket" "bucket" {
