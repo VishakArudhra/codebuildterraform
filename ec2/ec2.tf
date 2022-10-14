@@ -3,7 +3,7 @@ terraform {
  backend "s3" {
    bucket  = "codebuild-buckettf"
    key     = "eks-terraformstate.tf"
-   region  = "ap-south-1"
+   region  = "us-east-2"
  }
 }
 
